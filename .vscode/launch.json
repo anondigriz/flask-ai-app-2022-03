@@ -11,7 +11,9 @@
             "module": "flask",
             "env": {
                 "FLASK_APP": "ai_application",
-                "FLASK_ENV": "development"
+                "FLASK_ENV": "development",
+                "RECOGNIZER_MODEL": ".//train_models//tmp//saved_models//1648299421",
+                "UPLOAD_FOLDER": ".//upload"
             },
             "args": [
                 "run",
