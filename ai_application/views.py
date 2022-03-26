@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, request
 from ai_application import app
 
 @app.route("/")
@@ -8,4 +8,6 @@ def index():
 
 @app.route('/recognize', methods=('GET', 'POST'))
 def recognize():
-    return render_template("recognize.html")
+    if request.method == 'POST':
+        pass
+    return render_template("recognize.html", prediction=None, base64_image=None)

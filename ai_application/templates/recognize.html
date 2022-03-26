@@ -3,4 +3,22 @@
 {% block content %}
 <h1>{% block title %} Распознать изображение {% endblock %}</h1>
 
+{% if base64_image != None %}
+<div class="mb-3 text-center">
+    <figure class="figure">
+        <img src="data:;base64,{{ str_image }}" class="figure-img img-fluid rounded mx-auto d-block" alt="img_data"
+            id="imgslot">
+        {% if prediction != None: %}
+        <figcaption class="figure-caption text-center fs-3">{{ prediction }}</figcaption>
+        {% endif %}
+    </figure>
+</div>
+{% endif %}
+<form method="post" enctype=multipart/form-data>
+    <div class="mb-3">
+    <label for="file" class="form-label">Изображение</label>
+    <input type="file" name="file" class="form-control" id="formFile">
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
 {% endblock %}
