@@ -3,7 +3,7 @@ from ai_application import app
 from werkzeug.utils import secure_filename
 import os
 import base64
-from ai_application.recognizer import recognize
+from ai_application.recognizer import recognize_flower
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -38,14 +38,16 @@ def recognize():
         if file and allowed_file(file.filename):
             full_path = None
             base64_image = None
+            prediction = None
             try:
                 filename = secure_filename(file.filename)
                 full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(full_path)
+                prediction = recognize_flower(full_path)
                 base64_image = get_base64_image(full_path)
             finally:
                 if full_path != None:
                     os.remove(full_path)
-            return render_template("recognize.html", prediction=None, base64_image=base64_image)
+            return render_template("recognize.html", prediction=prediction, base64_image=base64_image)
 
     return render_template("recognize.html", prediction=None, base64_image=None)
