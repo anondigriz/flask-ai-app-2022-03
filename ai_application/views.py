@@ -3,6 +3,7 @@ from ai_application import app
 from werkzeug.utils import secure_filename
 import os
 import base64
+from ai_application.recognizer import recognize
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -36,7 +37,7 @@ def recognize():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             full_path = None
-            base64_image=None
+            base64_image = None
             try:
                 filename = secure_filename(file.filename)
                 full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
